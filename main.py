@@ -21,18 +21,19 @@ def getHTTPMetrics(data: dict):
     """)
 
 def setupHTTPServer():
+    """function to start a socket on port 80 to be used as an HTTP server"""
     addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
     global HttpSocket
     HttpSocket = socket.socket()
     HttpSocket.bind(addr)
     HttpSocket.listen(1)
 
-def save_config():
+def saveConfig():
     """function to save the config dict to the JSON file"""
     with open("config.json", "w") as f:
         json.dump(config, f)
 
-def load_config():
+def loadConfig():
     """function to load the config dict from the JSON file"""
     global config
     try:
@@ -84,7 +85,7 @@ def main():
     global sensor
 
     # Load the configuration
-    load_config()
+    loadConfig()
 
     # Setup the WiFi driver
     setupWifi()
